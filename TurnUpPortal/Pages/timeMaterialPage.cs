@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium;
+﻿using NUnit.Framework;
+using OpenQA.Selenium;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,8 +13,18 @@ namespace TurnUpPortal.Pages
     {
         public void createTimeRecord(IWebDriver driver)
         {
-            IWebElement createNew = driver.FindElement(By.XPath("//*[@id=\"container\"]/p/a"));
-            createNew.Click();
+
+            //Exception Handling
+
+            try
+            {
+                IWebElement createNew = driver.FindElement(By.XPath("//*[@id=\"container\"]/p/a"));
+                createNew.Click();
+            }
+            catch (Exception ex) { 
+                Assert.Fail("Create new button hasn't been identified");
+            }
+            
             Thread.Sleep(2000);
 
             //Select Time from options
@@ -57,14 +68,18 @@ namespace TurnUpPortal.Pages
             lastPage.Click();
             IWebElement lastColumn = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[3]/table/tbody/tr[last()]/td[1]"));
 
-            if (lastColumn.Text == "TA Programme")
-            {
-                Console.WriteLine("Time record created successfully");
-            }
-            else
-            {
-                Console.WriteLine("Failed to create Time record");
-            }
+            //NUnit Assertions
+
+            Assert.That(lastColumn.Text == "TA Programme", "Failed to create Time record");
+
+            //if (lastColumn.Text == "TA Programme")
+            //{
+            //    Assert.Pass("Time record created successfully");
+            //}
+            //else
+            //{
+            //    Assert.Fail ("Failed to create Time record");
+            //}
         }
 
         public void editTimeRecord()
@@ -76,6 +91,8 @@ namespace TurnUpPortal.Pages
         {
 
         }
+
+       
     }
 
 }
