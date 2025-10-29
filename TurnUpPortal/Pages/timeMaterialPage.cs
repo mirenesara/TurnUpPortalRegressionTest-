@@ -66,11 +66,11 @@ namespace TurnUpPortal.Pages
             IWebElement lastPage = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[4]/a[4]/span"));
             Thread.Sleep(5000);
             lastPage.Click();
-            IWebElement lastColumn = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[3]/table/tbody/tr[last()]/td[1]"));
 
-            //NUnit Assertions
+            
+            
 
-            Assert.That(lastColumn.Text == "TA Programme", "Failed to create Time record");
+            
 
             //if (lastColumn.Text == "TA Programme")
             //{
@@ -80,6 +80,24 @@ namespace TurnUpPortal.Pages
             //{
             //    Assert.Fail ("Failed to create Time record");
             //}
+        }
+
+        public string GetCode(IWebDriver driver)
+        {
+            IWebElement lastCode = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[3]/table/tbody/tr[last()]/td[1]"));
+            return lastCode.Text;
+        }
+
+        public string GetDesc(IWebDriver driver)
+        {
+            IWebElement lastdesc = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[3]/table/tbody/tr[last()]/td[3]"));
+            return lastdesc.Text;
+        }
+
+        public string GetPrice(IWebDriver driver)
+        {
+            IWebElement lastprice = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[3]/table/tbody/tr[last()]/td[4]"));
+            return lastprice.Text;
         }
 
         public void editTimeRecord()

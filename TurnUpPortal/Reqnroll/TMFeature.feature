@@ -10,3 +10,9 @@ Scenario: create time record with valid data
 	When I navigate to Time and Material Page
 	When I create a time record
 	Then the record should be created successfully
+
+Scenario Outline: edit existing time record with valid data
+	Given I logged into TurnUp Portal successfully
+	When I navigate to Time and Material Page
+	When I update the '<code>' on an existing record
+	Then the record should have the updated '<code>'
